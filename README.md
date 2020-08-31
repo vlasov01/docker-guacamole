@@ -39,7 +39,7 @@ docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
   -e "EXTENSIONS=auth-ldap,auth-duo"
-  oznu/guacamole
+  rpi/guacamole:1.0
 ```
 
 Currently the available extensions are:
@@ -57,25 +57,6 @@ You should only enable the extensions you require, if an extensions is not confi
 ## Default User
 
 The default username is `guacadmin` with password `guacadmin`.
-
-## Windows-based Docker Hosts
-
-Mapped volumes behave differently when running Docker for Windows and you may encounter some issues with PostgreSQL file system permissions. To avoid these issues, and still retain your config between container upgrades and recreation, you can use the local volume driver, as shown in the `docker-compose.yml` example below. When using this setup be careful to gracefully stop the container or data may be lost.
-
-```yml
-version: "2"
-services:
-  guacamole:
-    image: oznu/guacamole
-    container_name: guacamole
-    volumes:
-      - postgres:/config
-    ports:
-      - 8080:8080
-volumes:
-  postgres:
-    driver: local
-```
 
 ## License
 
