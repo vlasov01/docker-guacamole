@@ -1,6 +1,6 @@
 [![Docker Build Status](https://img.shields.io/docker/build/oznu/guacamole.svg?label=x64%20build)](https://hub.docker.com/r/oznu/guacamole/) [![Travis](https://img.shields.io/travis/oznu/docker-guacamole.svg?label=arm%20build)](https://travis-ci.org/oznu/docker-guacamole) [![Docker Pulls](https://img.shields.io/docker/pulls/oznu/guacamole.svg)](https://hub.docker.com/r/oznu/guacamole/)
 
-# Docker Guacamole
+# Docker Guacamole for RPi
 
 A Docker Container for [Apache Guacamole](https://guacamole.apache.org/), a client-less remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
 
@@ -13,21 +13,11 @@ This container runs the guacamole web client, the guacd server and a postgres da
 ## Usage
 
 ```shell
+docker build --tag rpi/guacamole:1.0 docker-guacamole
 docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
-  oznu/guacamole
-```
-
-## Raspberry Pi / ARMv6
-
-This image will also allow you to run [Apache Guacamole](https://guacamole.apache.org/) on a Raspberry Pi or other Docker-enabled ARMv5/6/7/8 devices by using the `armhf` tag.
-
-```shell
-docker run \
-  -p 8080:8080 \
-  -v </path/to/config>:/config \
-  oznu/guacamole:armhf
+  rpi/guacamole:1.0
 ```
 
 ## Parameters
@@ -89,7 +79,7 @@ volumes:
 
 ## License
 
-Copyright (C) 2017-2020 oznu
+Copyright (C) 2017-2020
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
