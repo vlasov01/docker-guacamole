@@ -12,24 +12,17 @@ matrix:
       arch: arm64
       env:
         - DOCKERFILE="Dockerfile"
-        - TAG_SUFFIX="arm32v7"
-        - TARGET_IMAGE="rpi/guacamole"
-        - ALT_SUFFIX="armhf"
+        - TAG_NAME="arm32v7"
+        - LOCAL_IMAGE="rpi/guacamole"
 
 script:
-  - export TARGET_IMAGE_TAG=$(if [ "$TRAVIS_BRANCH" = "master" ]; then if [ "$TAG_SUFFIX" = "" ]; then echo "latest"; else echo "$TAG_SUFFIX"; fi; else if [ "$TAG_SUFFIX" = "" ]; then echo "$TRAVIS_BRANCH"; else echo "$TRAVIS_BRANCH-$TAG_SUFFIX"; fi; fi)
-  - docker pull $TARGET_IMAGE:$TARGET_IMAGE_TAG && export IMAGE_CACHE="--cache-from $TARGET_IMAGE:$TARGET_IMAGE_TAG" || export IMAGE_CACHE=""
-  - docker build -f $DOCKERFILE $IMAGE_CACHE -t $TARGET_IMAGE:$TARGET_IMAGE_TAG .
-  - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-  - docker push $TARGET_IMAGE:$TARGET_IMAGE_TAG
-
-  # push alternate tags
-  - if [ -z "$ALT_SUFFIX" ]; then
-      echo "No alternate tags set for this build.";
-    else
-      echo "Tagging with alternate tag '$ALT_SUFFIX'";
-      export ALT_IMAGE_TAG=$(if [ "$TRAVIS_BRANCH" = "master" ]; then if [ "$ALT_SUFFIX" = "" ]; then echo "error"; else echo "$ALT_SUFFIX"; fi; else if [ "$ALT_SUFFIX" = "" ]; then echo "$TRAVIS_BRANCH"; else echo "$TRAVIS_BRANCH-$ALT_SUFFIX"; fi; fi);
-      docker tag $TARGET_IMAGE:$TARGET_IMAGE_TAG $TARGET_IMAGE:$ALT_IMAGE_TAG;
-      docker push $TARGET_IMAGE:$ALT_IMAGE_TAG;
-    fi
-    
+  - docker --version
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -f $DOCKERFILE -t $LOCAL_IMAGE:$TAG_NAME .
+  - docker ps -a
+  
+deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker ps -a
+  - docker tag $LOCAL_IMAGE:$TAG_NAME $REPO:$TAG_NAME
+  - docker push $REPO:$TAG_NAME
