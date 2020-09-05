@@ -19,10 +19,6 @@ script:
   - docker --version
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -f $DOCKERFILE -t $LOCAL_IMAGE:$TAG_NAME .
-  - docker ps -a
-  
-deploy:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker ps -a
+  - docker ps -ls
   - docker tag $LOCAL_IMAGE:$TAG_NAME $REPO:$TAG_NAME
   - docker push $REPO:$TAG_NAME
