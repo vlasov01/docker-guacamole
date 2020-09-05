@@ -13,6 +13,7 @@ matrix:
       env:
         - DOCKERFILE="Dockerfile"
         - TAG_SUFFIX="arm32v7"
+        - TARGET_IMAGE="rpi/guacamole"
         - ALT_SUFFIX="armhf"
 
 script:
