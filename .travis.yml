@@ -7,20 +7,12 @@ services:
 
 matrix:
   include:
-    # amd64
-    - os: linux
-      arch: amd64
-      env:
-        - DOCKERFILE="Dockerfile"
-        - TAG_SUFFIX="latest"
-        - ALT_SUFFIX="amd64"
-
-    # arm32v5
+    # arm32v7
     - os: linux
       arch: arm64
       env:
-        - DOCKERFILE="Dockerfile.raspberry-pi"
-        - TAG_SUFFIX="arm32v5"
+        - DOCKERFILE="Dockerfile"
+        - TAG_SUFFIX="arm32v7"
         - ALT_SUFFIX="armhf"
 
 script:
