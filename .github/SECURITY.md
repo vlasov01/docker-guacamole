@@ -13,9 +13,9 @@ seriously. Thank you for improving the security of `docker-guacamole`. We apprec
 your efforts and responsible disclosure and will make every effort to acknowledge 
 your contributions.
 
-Report security bugs by emailing the maintainer at dev@oz.nu
+Report security bugs by sending a Twitter PM to the maintainer at @wiisniper
 
-The maintainer will acknowledge your email within 48 hours, and will send a
+The maintainer will acknowledge your message within 48 hours, and will send a
 more detailed response within 48 hours indicating the next steps in handling
 your report. After the initial reply to your report, the security team will
 endeavor to keep you informed of the progress towards a fix and full
