@@ -17,6 +17,7 @@ docker run \
   -v </path/to/config>:/config \
   rpi/guacamole:1.0
 ```
+Alternativly, you can build using provided Travis-CI script. You will need to add the following environment variables to your Travis-CI configuration: DOCKER_USERNAME, DOCKER_PASSWORD and REPO (your Docker repository).
 
 ## Parameters
 
