@@ -7,6 +7,7 @@ This image will run on Raspberry Pi 3 boards with Docker support.
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/esgaHNRxdhY/0.jpg)](http://www.youtube.com/watch?v=esgaHNRxdhY "Video Title")
 
 This container runs the guacamole web client, the guacd server and a postgres database.
+This project is RPi specific fork of https://github.com/oznu/docker-guacamole
 
 ## Usage
 ```shell
