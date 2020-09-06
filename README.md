@@ -9,13 +9,18 @@ This image will run on Raspberry Pi 3 boards with Docker support.
 This container runs the guacamole web client, the guacd server and a postgres database.
 
 ## Usage
-
 ```shell
-docker build --tag rpi/guacamole:1.0 docker-guacamole
+docker pull iiot/guacamole:arm32v7
 docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
-  rpi/guacamole:1.0
+  iiot/guacamole:arm32v7
+```
+
+## Build
+```shell
+docker build --tag rpi/guacamole:1.0 docker-guacamole
+
 ```
 Alternativly, you can build using provided Travis-CI script. You will need to add the following environment variables to your Travis-CI configuration: DOCKER_USERNAME, DOCKER_PASSWORD and REPO (your Docker repository).
 
@@ -37,8 +42,8 @@ For example:
 docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
-  -e "EXTENSIONS=auth-ldap,auth-duo"
-  rpi/guacamole:1.0
+  -e "EXTENSIONS=auth-ldap,auth-duo" \
+  iiot/guacamole:arm32v7
 ```
 
 Currently the available extensions are:
