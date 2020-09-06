@@ -17,8 +17,10 @@ matrix:
 
 script:
   - docker --version
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -f $DOCKERFILE -t $LOCAL_IMAGE:$TAG_NAME .
-  - docker ps -ls
+
+deploy:
+  skip_cleanup: true
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker tag $LOCAL_IMAGE:$TAG_NAME $REPO:$TAG_NAME
   - docker push $REPO:$TAG_NAME
